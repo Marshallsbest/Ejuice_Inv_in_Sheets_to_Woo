@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <base target="_top">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+    <style>
+      form{
+      padding: 20px;
+      }
+    </style>
+    <script>
+    // Prevent forms from submitting.
+      function preventFormSubmit() {
+        var forms = document.querySelectorAll('form');
+          for (var i = 0; i < forms.length; i++) {
+            forms[i].addEventListener('submit', function(event) {
+            event.preventDefault();
+          });
+        }
+      }
+      window.addEventListener('load', preventFormSubmit);
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class = "sidebar">
+      <form onSubmit="formSubmit(this)">
+        <label for="company">Company</label><br>
+        <input type="text" id="company" name="company" autofocus="autofocus"> <br>
+        <label for="supCode">Supplier Code (3 digits)</label><br>
+        <input type="text" id="supCode" name="supCode" maxlength="3"><br>
+        <label for="skuCode">SKU Code (2 digits)</label><br>
+        <input type="text" id="skuCode" name="skuCode"><br>
+        <label for="email">Email</label><br>
+        <input type="text" id="email" name="email"><br>
+        <label for="contact">Contact Name</label><br>
+        <input type="text" id="contact" name="contact"><br>
+        <label for="website">Website</label><br>
+        <input type="text" id="website" name="website"><br>
+        <p> Navigate to the Suppliers Webite and get the Logo URL</p> 
+        <label for="logo">Logo URL</label><br>
+        <input type="text" id="logo" name="logo"/><br>
+       <input class="action" id="submit" type="submit" value="Submit">
+      <button onclick="google.script.host.close()">Cancel</button>
+    </form>
+  </div>
+</body>
+    <!--JavaScript at end of body for optimized loading-->
+<script>
+    
+function formSubmit(userObject){
+  $("#submit").prop('disabled',true);
+  google.script.run.withSuccessHandler(updateScreen).withFailureHandler(updateScreen).supplierUpdate(userObject);
+  }
+    
+function updateScreen(){
+  google.script.host.close();
+  }
+    
+</script>
+</html>
